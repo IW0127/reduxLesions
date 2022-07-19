@@ -1,25 +1,25 @@
-const path = require("path");
+const path = require('path');
 
-const common = require("./webpack.common");
-const { merge } = require("webpack-merge");
+const common = require('./webpack.common');
+const { merge } = require('webpack-merge');
 
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-const { HotModuleReplacementPlugin } = require("webpack");
+const { HotModuleReplacementPlugin } = require('webpack');
 
 const devConfig = {
-  mode: "development",
+  mode: 'development',
 
   devServer: {
-    port: 3000 | 3001 | 3002 | 5000,
-    static: path.join(__dirname, "../dist"),
+    static: path.join(__dirname, '../dist'),
+    port: 3000 || 5000,
     compress: true,
     hot: true,
     open: true,
     historyApiFallback: true,
   },
   /*  devtool: "source-map", */
-  target: "web",
+  target: 'web',
   plugins: [new HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()],
 };
 

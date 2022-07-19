@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deletePost, selectPostById, updatePost } from './postsSlice';
 import { useNavigate, useParams } from 'react-router-dom';
-import { selectAllPosts, selectPostById, updatePost } from './postsSlice';
-
+import { selectAllUsers } from '../users/usersSlice';
 const EditPostForm = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
 
   const post = useSelector((state) => selectPostById(state, Number(postId)));
-  const users = useSelector(selectAllPosts);
+  const users = useSelector(selectAllUsers);
 
   const [title, setTitle] = useState(post?.title);
   const [content, setContent] = useState(post?.body);
@@ -55,13 +56,27 @@ const EditPostForm = () => {
       }
     }
   };
-
   const usersOptions = users.map((user) => (
     <option value={user.id} key={user.id}>
-      {user.name}{' '}
+      {user.name}
     </option>
   ));
 
+  const onDeletePostClicked = () => {
+    try {
+      setRequestStatus('pending');
+      dispatch(deletePost({ id: post.id })).unwrap();
+
+      setTitle('');
+      setContent('');
+      setUserId('');
+      navigate('/');
+    } catch (err) {
+      console.error('failed to delete the post', err);
+    } finally {
+      setRequestStatus('idle');
+    }
+  };
   return (
     <section>
       <h2>Edit Post</h2>
@@ -87,10 +102,18 @@ const EditPostForm = () => {
         <textarea
           name='postContent'
           id='postContent'
+          value={content}
           onChange={onContentChanged}
         />
         <button type='button' onClick={onSavePostClicked} disabled={!canSave}>
           Save Post
+        </button>
+        <button
+          className='deleteButton'
+          type='button'
+          onClick={onDeletePostClicked}
+        >
+          Delete Post
         </button>
       </form>
     </section>
