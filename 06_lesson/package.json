@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "description": "My webpack project",
+  "description": "06_lesson",
   "name": "my-webpack-project",
   "scripts": {
     "build": "webpack --config config/webpack.prod.js",

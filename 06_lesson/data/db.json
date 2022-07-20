@@ -8,12 +8,6 @@
     },
     {
       "userId": 1,
-      "id": 2,
-      "title": "quis ut nam facilis et officia qui",
-      "completed": false
-    },
-    {
-      "userId": 1,
       "id": 4,
       "title": "et porro tempora",
       "completed": true
@@ -1171,16 +1165,10 @@
       "completed": true
     },
     {
-      "userId": 10,
-      "id": 200,
-      "title": "ipsam aperiam voluptates qui",
-      "completed": false
-    },
-    {
       "userId": 1,
-      "title": "New todo!",
+      "title": "ather thod",
       "completed": false,
-      "id": 201
+      "id": 200
     }
   ]
 }
