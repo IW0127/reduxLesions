@@ -10,7 +10,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 store.dispatch(fetchUsers());
-console.log(extendedApiSlice);
 store.dispatch(extendedApiSlice.endpoints.getPosts.initiate());
 
 root.render(
