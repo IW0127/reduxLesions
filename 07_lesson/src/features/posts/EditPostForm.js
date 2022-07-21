@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { deletePost, selectPostById, updatePost } from './postsSlice';
+import { useSelector } from 'react-redux';
+import { selectPostById } from './postsSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { selectAllUsers } from '../users/usersSlice';
@@ -42,8 +42,8 @@ const EditPostForm = () => {
           title,
           body: content,
           userId,
-          reactions: post.reactions,
         }).unwrap();
+
         setTitle('');
         setContent('');
         setUserId('');
@@ -69,8 +69,6 @@ const EditPostForm = () => {
       navigate('/');
     } catch (err) {
       console.error('failed to delete the post', err);
-    } finally {
-      setRequestStatus('idle');
     }
   };
   return (

@@ -37,7 +37,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       query: (id) => `/posts/?userId=${id}`,
       transformResponse: (responseData) => {
         let min = 1;
-        const loadedPosts = (responseData) => {
+        const loadedPosts = responseData.map((post) => {
           if (!post?.date)
             post.date = sub(new Date(), { minutes: min++ }).toISOString();
           if (!post?.reactions)
@@ -48,13 +48,11 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
               rocket: 0,
               coffee: 0,
             };
-          z;
           return post;
-        };
+        });
         return postsAdapter.setAll(initialState, loadedPosts);
       },
       providesTags: (result, error, arg) => [
-        { type: 'Post', id: 'LIST' },
         ...result.ids.map((id) => ({ type: 'Post', id })),
       ],
     }),
@@ -91,7 +89,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     deletePost: builder.mutation({
       query: ({ id }) => ({
         url: `/posts/${id}`,
-        method: 'PUT',
+        method: 'DELETE',
         body: { id },
       }),
       invalidatesTags: (result, error, arg) => [{ type: 'Post', id: arg.id }],
@@ -139,7 +137,6 @@ export const selectPostsResult = extendedApiSlice.endpoints.getPosts.select();
 
 const selectPostsData = createSelector(
   selectPostsResult,
-
   (postsResult) => postsResult.data
 );
 
