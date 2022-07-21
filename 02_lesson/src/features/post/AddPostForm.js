@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { postAdded } from "./postSlice";
-import { selectAllUsers } from "../users/usersSlice";
+import { postAdded } from './postSlice';
+import { selectAllUsers } from '../users/usersSlice';
 
 const AddPostForm = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [userId, setUserId] = useState("");
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [userId, setUserId] = useState('');
 
   const users = useSelector(selectAllUsers);
 
@@ -20,9 +20,9 @@ const AddPostForm = () => {
   const onSavePostClicked = () => {
     if (title && content) {
       dispatch(postAdded(title, content, userId));
-      setTitle("");
-      setContent("");
-      setUserId("");
+      setTitle('');
+      setContent('');
+      setUserId('');
     }
   };
 
@@ -38,27 +38,27 @@ const AddPostForm = () => {
     <section>
       <h2>Add a New Post</h2>
       <form>
-        <label htmlFor="postTitle">Post Title:</label>
+        <label htmlFor='postTitle'>Post Title:</label>
         <input
-          type="text"
-          id="postTitle"
-          name="postTitle"
+          type='text'
+          id='postTitle'
+          name='postTitle'
           value={title}
           onChange={onTitleChanged}
         />
-        <label htmlFor="postAuthor">Author:</label>
-        <select id="postAuthor" onChange={onAuthorChanged}>
-          <option value=""></option>
+        <label htmlFor='postAuthor'>Author:</label>
+        <select id='postAuthor' onChange={onAuthorChanged}>
+          <option value=''></option>
           {usersOptions}
         </select>
-        <label htmlFor="postContent">Content:</label>
+        <label htmlFor='postContent'>Content:</label>
         <textarea
-          id="postContent"
-          name="postContent"
+          id='postContent'
+          name='postContent'
           value={content}
           onChange={onContentChanged}
         />
-        <button type="button" onClick={onSavePostClicked} disabled={!cnnSave}>
+        <button type='button' onClick={onSavePostClicked} disabled={!cnnSave}>
           Save Post
         </button>
       </form>
